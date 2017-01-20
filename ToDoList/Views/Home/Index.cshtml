@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ToDoList.Domain.ToDoListItem>
+
+@{
+    ViewBag.Title = "To Do List";
+}
+
+<div class="jumbotron">
+    <h1>To Do List</h1>
+</div>
+
+<div class="row">
+ 
+        <h2>To Do List</h2>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-horizontal" }))
+{
+    if (Model != null)
+    {
+  <ul>
+@foreach (var item in Model)
+{
+    <li>
+    @Html.ActionLink("Edit", "EditItem", "ToDoListItem", new { itemId = item.id },null)
+    @Html.ActionLink("Remove", "DeleteItem", new { itemId = item.id })
+    @Html.DisplayFor(i => item.description)
+    @Html.CheckBoxFor(i => item.isCompleted)
+    </li>
+}
+   </ul>
+    }
+}
+    @Html.ActionLink("Add item", "AddItem", "ToDoListItem", null, new { @class = "btn btn-primary" })
+
+</div>
